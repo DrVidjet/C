@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1696232596 source:c:\users\drvidjet\desktop\c\lab_1_3\main.c
+	<stdlib.h>
+	<stdio.h>
+	<limits.h>
+	<float.h>
+
