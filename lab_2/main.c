@@ -3,8 +3,10 @@
 #include <math.h>
 #include <stdbool.h>
 #include <string.h>
-#define EPS7 1e-5
+#define EPS7 1e-7
 #define EPS8 1e-4
+
+
 
 int factor;
 int end;
@@ -45,10 +47,8 @@ void first()
 {
     double k, m, f;
 
-    printf("Please, enter number k: ");
-    scanf("%lf", &k);
-    printf("Please, enter number m: ");
-    scanf("%lf", &m);
+    printf("Please, enter number k and m: ");
+    scanf("%lf %lf", &k, &m);
 
     if(k > 0)
     {
@@ -133,11 +133,13 @@ void third()
 
     } else
     {
-        a = abs(ax)+abs(ay);
-        b = abs(bx)+abs(by);
-        if(a < b)
+        a = hypot(ax, ay);
+        b = hypot(bx, by);
+
+        printf("a = %lf, b = %lf\n", a, b);
+        if(a > b)
             printf("Point a is more distant: a(%.1lf; %.1lf), b(%.1lf; %.1lf)\n", ax, ay, bx, by);
-        else if(a > b)
+        else if(a < b)
             printf("Point b is more distant: a(%.1lf; %.1lf), b(%.1lf; %.1lf)\n", ax, ay, bx, by);
         else
             printf("Points equally distant: a(%.1lf; %.1lf), b(%.1lf; %.1lf)\n", ax, ay, bx, by);
@@ -159,7 +161,7 @@ void fouth()
 
     for(int i = 1; i <= n; i++)
     {
-        c = (a-i*n)*c;
+        c *= a-i*n;
         printf("%lf\n", c);
     }
     c *= a;
@@ -243,30 +245,27 @@ void sixth()
 }
 void seventh()
 {
-    double a,x,s,f;
+    double x,s,r;
     int n;
 
     printf("Enter the number x: ");
     scanf("%lf", &x);
 
-    a = 0.5;
-    s = 0;
+    r = x;
+    s = x;
 
-    for(n = 1; fabs(a) > EPS7; n += 2)
-    {
-        f = factorial(n);
-        a = powf(x, n)/f;
-        s += a;
-    }
-    printf("s = %lf\ne^%.0lf-e^%.0lf/2 = %lf\n", s, x, -x, (powf(M_E, x)-pow(M_E, -x))/2);
+    for(n = 3; fabs(r) > EPS7; n += 2)
+        s += r *= x*x/n/(n-1);
+
+    printf("s = %lf\ne^%.0lf-e^%.0lf/2 = %lf\n", s, x, -x, sinh(x));//powf(M_E, x)-pow(M_E, -x)/2);
 
     end = 7;
     choice();
 }
 void eighth()
 {
-    double a,x,s,f;
-    int n = 0;
+    double a,c,b,x,s,d,t;
+    int n = 1;
 
     printf("Enter the number x(0.1-1): ");
     scanf("%lf", &x);
@@ -279,18 +278,26 @@ void eighth()
             choice();
         }
 
-    a = 0.5;
-    s = 0;
+    a = 1;
+    s = 1;
+    d = 1;
+    b = 1;
+    c = 1;
 
-    while(fabs(a) > EPS8)
+    while(fabs(d) > EPS8)
     {
-        f = factorial(n);
-        a = ((2*n+1)/f)*powf(x, 2*n);
-        s += a;
+        c = n-1;
+        b = factorial(c)*n;
+        //a = ((2*n+1)/f)*powf(x, 2*n);
+        t = (2*n-1);
+        a = ((2*n+1)/t)*x*x;
+        d *= a/b;
+        s += d;
         n++;
+        printf("a = %lf, b = %lf, d = %lf, s = %lf\n", a, b, d, s);
     }
 
-    printf("s = %.6lf\n(1+2%.1lf^2)e^%.1lf^2 = %.6lf\n", s, x, x, (1+2*powf(x, 2))*powf(M_E, powf(x, 2)));
+    printf("s = %.6lf\n(1+2%.1lf^2)e^%.1lf^2 = %.6lf\n", s, x, x, (1+2*x*x)*pow(M_E, powf(x, 2)));
 
     end = 8;
     choice();
@@ -333,10 +340,10 @@ void nineth()
     end = 9;
     choice();
 }
-void choice()
+
+int choice()
 {
     int choice;
-    int res(int value);
     printf("1 - repeat the program, 2 - go back to the menu, 3 - exit the program\n");
     scanf("%d", &choice);
     if(choice == 1)
@@ -367,12 +374,11 @@ void choice()
     else if(choice == 3)
         system("exit");
 }
+
 int factorial(factor)
 {
-    if (factor == 1 || factor == 0)
-    {
+    if(factor == 1 || factor == 0)
         return 1;
-    }
     return factor * factorial(factor - 1);
 }
 
