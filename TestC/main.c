@@ -5,17 +5,27 @@
 int main()
 {
 
-    printf("3! = %d\n", factorial(3));
-    printf("5! = %d\n", factorial(5));
-    printf("7! = %d\n", factorial(7));
+    double a = 2, b = 1;
+    double n; // количество итераций
+    double c, d = 1;
+
+    printf("n = ");
+    scanf("%lf", &n);
+
+    for(int i = 1; i<=n; i++)
+    {
+        if(i > 1)
+        {
+            if(i%2 != 0)
+                a *= 2;
+        if(i%2 == 0)
+            b = i+1;
+        }
+
+        c = a/b;
+        d *= c;
+    }
+    printf("d = %lf", d);
 
     return 0;
-}
-int factorial(factor)
-{
-    if (factor == 1)
-    {
-        return 1;
-    }
-    return factor * factorial(factor - 1);
 }
