@@ -107,7 +107,7 @@ main()
  printf("DBL_MIN : d=%g\n", d);
 
  d=DBL_EPSILON;
- printf("DBL_EPSILON : d=%g\n", d);
+ printf("DBL_ESILON : d=%g\n", d);
 
  d=1e15+1;
  printf("1e15+1 : d=%lf\n", d);
