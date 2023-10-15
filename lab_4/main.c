@@ -75,7 +75,7 @@ void first()
             {
                 if (A[tic] > A[tic+1])
                 {
-                    int temp = A[tic];
+                    temp = A[tic];
                     A[tic] = A[tic+1];
                     A[tic+1] = temp;
                 }
