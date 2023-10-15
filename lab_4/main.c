@@ -69,9 +69,9 @@ void first()
 
 
 
-    for(i = 0; i < a-1; i++)
+    for(i = 0; i < a; i++)
         {
-            for(tic = 0; tic < a-i-1; tic++)
+            for(tic = 0; tic < a-i; tic++)
             {
                 if (A[tic] > A[tic+1])
                 {
