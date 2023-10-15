@@ -69,15 +69,15 @@ void first()
 
 
 
-    for (i = 0; i < a-1; i++)
+    for(i = 0; i < a-1; i++)
         {
-            for (tic = 0; tic < a-i-1; tic++)
+            for(tic = 0; tic < a-i-1; tic++)
             {
-                if (A[tic] > A[tic + 1])
+                if (A[tic] > A[tic+1])
                 {
                     int temp = A[tic];
-                    A[tic] = A[tic + 1];
-                    A[tic + 1] = temp;
+                    A[tic] = A[tic+1];
+                    A[tic+1] = temp;
                 }
             }
         }
