@@ -59,7 +59,7 @@ void first()
     else if(!h)
     {
         for(i = 0; i < a; i++)
-            A[i] = rand()%500;
+            A[i] = rand()%100;
     }
 
     printf("\nBefore sort: \n\n");
