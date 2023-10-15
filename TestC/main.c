@@ -4,28 +4,24 @@
 
 int main()
 {
+    double x1,x2,y1, y2, x, y, A, B, C;
 
-    double a = 2, b = 1;
-    double n; // количество итераций
-    double c, d = 1;
+    printf("Enter x1 and y1: ");
+    scanf("%lf %lf", &x1, &y1);
+    printf("Enter x2 and y2: ");
+    scanf("%lf %lf", &x2, &y2);
 
-    printf("n = ");
-    scanf("%lf", &n);
 
-    for(int i = 1; i<=n; i++)
-    {
-        if(i > 1)
-        {
-            if(i%2 != 0)
-                a *= 2;
-        if(i%2 == 0)
-            b = i+1;
-        }
+    A = hypot(x1, y1);
+    B = hypot(x2, y2);
 
-        c = a/b;
-        d *= c;
-    }
-    printf("d = %lf", d);
+    x = fabs(x1)-fabs(x2);
+    y = fabs(y1)-fabs(y2);
+
+    C = hypot(fabs(x), fabs(y));
+
+    printf("A = %lf, B = %lf, C = %lf");
+
 
     return 0;
 }
