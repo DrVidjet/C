@@ -189,6 +189,54 @@ void second()
 }
 void third()
 {
+    int **A;
+    int i, j, n, m;
+    bool h;
+
+    srand(time(NULL));
+
+    printf("Would you want to enter the numbers?(1 - yes, 0 - no) ");
+    scanf("%d", &h);
+
+    printf("Enter the number of rows and the number of columns: ");
+    scanf("%d %d", &n, &m);
+
+    A = (int**)malloc(n * sizeof(int*));
+
+    if(h)
+    {
+        for (i = 0; i<n; i++)
+        {
+            A[i] = (int*)malloc(m * sizeof(int));
+            for (j = 0; j<m; j++)  // цикл по столбцам
+            {
+                printf("a[%d][%d] = ", i, j);
+                scanf("%d", &A[i][j]);
+            }
+        }
+    }
+    else if(!h)
+    {
+        for (i = 0; i < n; i++)
+        {
+            A[i] = (int*)malloc(m * sizeof(int));
+            for (j = 0; j < m; j++)
+                A[i][j] = -100+rand()%200;
+        }
+    }
+
+    printf("\n");
+
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < m; j++)
+            printf(" %4d ", A[i][j]);
+
+        printf("\n");
+    }
+
+    printf("\n");
+
     end = 3;
     choice();
 }
