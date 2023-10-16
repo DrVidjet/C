@@ -190,7 +190,9 @@ void second()
 void third()
 {
     int **A;
-    int i, j, n, m;
+    int n, m, Sp, So;
+    double F;
+    int i, j;
     bool h;
 
     srand(time(NULL));
@@ -201,33 +203,33 @@ void third()
     printf("Enter the number of rows and the number of columns: ");
     scanf("%d %d", &n, &m);
 
-    A = (int**)malloc(n * sizeof(int*));
+    A = (int**)malloc(n * sizeof(int*)); // Освобождение памяти под строки
 
-    if(h)
+    if(h) // Если вводим значения вручную
     {
-        for (i = 0; i<n; i++)
+        for (i = 0; i<n; i++) // Цикл по строкам
         {
-            A[i] = (int*)malloc(m * sizeof(int));
-            for (j = 0; j<m; j++)  // цикл по столбцам
+            A[i] = (int*)malloc(m * sizeof(int)); // Освобождение памяти под столбцы
+            for (j = 0; j<m; j++) // Цикл по столбцам
             {
-                printf("a[%d][%d] = ", i, j);
+                printf("a[%d][%d] = ", i+1, j+1);
                 scanf("%d", &A[i][j]);
             }
         }
     }
-    else if(!h)
+    else if(!h) // Если даем программе сгенерировать значения
     {
-        for (i = 0; i < n; i++)
+        for (i = 0; i < n; i++) // Цикл по строкам
         {
-            A[i] = (int*)malloc(m * sizeof(int));
-            for (j = 0; j < m; j++)
+            A[i] = (int*)malloc(m * sizeof(int)); // Освобождение памяти под столбцы
+            for (j = 0; j < m; j++) // Цикл по столбцам
                 A[i][j] = -100+rand()%200;
         }
     }
 
     printf("\n");
 
-    for (i = 0; i < n; i++)
+    for (i = 0; i < n; i++) // Вывод матрицы
     {
         for (j = 0; j < m; j++)
             printf(" %4d ", A[i][j]);
@@ -236,6 +238,36 @@ void third()
     }
 
     printf("\n");
+    Sp = 0;
+    for(i = 1; i <= n; i++)
+    {
+        if(i%2 != 0)
+        {
+            for(j = 1; j <= m; j++)
+            {
+                    if(A[i-1][j-1]>0)
+                        Sp += A[i-1][j-1];
+            }
+        }
+    }
+    So = 0;
+    for(i = 1; i <= n; i++)
+    {
+        if(i%2 == 0)
+        {
+            for(j = 1; j <= m; j++)
+            {
+                if(A[i-1][j-1]<0)
+                    So += A[i-1][j-1];
+            }
+        }
+    }
+
+    printf("\nSp = %d, So = %d\n\n", Sp, So);
+
+    F = ((double)Sp+(double)So)/(Sp-So);
+
+    printf("\nF = %lf\n\n", F);
 
     end = 3;
     choice();
