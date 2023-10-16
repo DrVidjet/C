@@ -203,33 +203,33 @@ void third()
     printf("Enter the number of rows and the number of columns: ");
     scanf("%d %d", &n, &m);
 
-    A = (int**)malloc(n * sizeof(int*)); // Освобождение памяти под строки
+    A = (int**)malloc(n * sizeof(int*));
 
-    if(h) // Если вводим значения вручную
+    if(h)
     {
-        for (i = 0; i<n; i++) // Цикл по строкам
+        for (i = 0; i<n; i++)
         {
-            A[i] = (int*)malloc(m * sizeof(int)); // Освобождение памяти под столбцы
-            for (j = 0; j<m; j++) // Цикл по столбцам
+            A[i] = (int*)malloc(m * sizeof(int));
+            for (j = 0; j<m; j++)
             {
                 printf("a[%d][%d] = ", i+1, j+1);
                 scanf("%d", &A[i][j]);
             }
         }
     }
-    else if(!h) // Если даем программе сгенерировать значения
+    else if(!h)
     {
-        for (i = 0; i < n; i++) // Цикл по строкам
+        for (i = 0; i < n; i++)
         {
-            A[i] = (int*)malloc(m * sizeof(int)); // Освобождение памяти под столбцы
-            for (j = 0; j < m; j++) // Цикл по столбцам
+            A[i] = (int*)malloc(m * sizeof(int));
+            for (j = 0; j < m; j++)
                 A[i][j] = -100+rand()%200;
         }
     }
 
     printf("\n");
 
-    for (i = 0; i < n; i++) // Вывод матрицы
+    for (i = 0; i < n; i++)
     {
         for (j = 0; j < m; j++)
             printf(" %4d ", A[i][j]);
