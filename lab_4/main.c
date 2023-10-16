@@ -119,6 +119,71 @@ void first()
 }
 void second()
 {
+    int a, tic, i, temp, *A, n;
+    bool h;
+
+    srand(time(NULL));
+
+    printf("Would you want to enter the numbers?(1 - yes, 0 - no) ");
+    scanf("%d", &h);
+
+    printf("Enter the size of the array: ");
+    scanf("%d", &a);
+
+    A = (int*)malloc(a * sizeof(int));
+
+    if(h)
+    {
+        for(i = 0; i < a; i++)
+        {
+            printf("A[%d] = ", i);
+            scanf("%d", &A[i]);
+        }
+    }
+    else if(!h)
+    {
+        for(i = 0; i < a; i++)
+            A[i] = -100+rand()%200;
+    }
+
+    n = 0;
+    for(i = 0; i < a; i++)
+    {
+        if(A[i] > 0)
+            n++;
+        if(n == 2)
+        {
+            i++;
+            break;
+        }
+    }
+    if(n < 2)
+        printf("The array is incorrect!\n\n");
+    else
+    {
+        printf("\nBefore sort: \n\n");
+        for(int r = 0; r < a; r++)
+            printf("A[%d] = %d\n", r, A[r]);
+
+        a++;
+        A = realloc(A, a*sizeof(int));
+        temp = A[i];
+        A[i] = 100;
+        tic = A[i+1];
+        A[i+1] = temp;
+
+        for(n=a; n>i+2; n--)
+            A[n] = A[n-1];
+        A[i+2] = tic;
+
+        printf("\n\nAfter sort: \n\n");
+
+        for(i = 0; i < a; i++)
+            printf("A[%d] = %d\n", i, A[i]);
+
+        printf("\n");
+    }
+    free(A);
     end = 2;
     choice();
 }
