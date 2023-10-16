@@ -26,6 +26,8 @@ int main(void)
         break;
         case 6: sixth();
         break;
+        case 7: seventh();
+        break;
     }
 
     system("pause");
@@ -226,7 +228,7 @@ void third()
         }
     }
 
-    printf("\n");
+    printf("\n\n");
 
     for (i = 0; i < n; i++)
     {
@@ -262,12 +264,16 @@ void third()
         }
     }
 
-    printf("\nSp = %d, So = %d\n\n", Sp, So);
+    printf("\n   Sp = %d, So = %d\n\n", Sp, So);
 
     F = ((double)Sp+(double)So)/(Sp-So);
 
-    printf("\nF = %lf\n\n", F);
+    printf("   F = %lf\n\n\n", F);
 
+    for (i = 0; i < n-1; i++) {
+        free(A[i]);
+    }
+    free(A);
     end = 3;
     choice();
 }
@@ -284,6 +290,88 @@ void fifth()
 void sixth()
 {
     end = 6;
+    choice();
+}
+void seventh()
+{
+    int n, m, Sp, So;
+    double F;
+    int i, j;
+    bool h;
+
+    srand(time(NULL));
+
+    printf("Would you want to enter the numbers?(1 - yes, 0 - no) ");
+    scanf("%d", &h);
+
+    printf("Enter the number of rows and the number of columns: ");
+    scanf("%d %d", &n, &m);
+
+    int A[n][m];
+
+    if(h)
+    {
+        for (i = 0; i<n; i++)
+        {
+            for (j = 0; j<m; j++)
+            {
+                printf("a[%d][%d] = ", i+1, j+1);
+                scanf("%d", &A[i][j]);
+            }
+        }
+    }
+    else if(!h)
+    {
+        for (i = 0; i < n; i++)
+        {
+            for (j = 0; j < m; j++)
+                A[i][j] = -100+rand()%200;
+        }
+    }
+
+    printf("\n\n");
+
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < m; j++)
+            printf(" %4d ", A[i][j]);
+
+        printf("\n");
+    }
+
+    printf("\n");
+    Sp = 0;
+    for(i = 1; i <= n; i++)
+    {
+        if(i%2 != 0)
+        {
+            for(j = 1; j <= m; j++)
+            {
+                    if(A[i-1][j-1]>0)
+                        Sp += A[i-1][j-1];
+            }
+        }
+    }
+    So = 0;
+    for(i = 1; i <= n; i++)
+    {
+        if(i%2 == 0)
+        {
+            for(j = 1; j <= m; j++)
+            {
+                if(A[i-1][j-1]<0)
+                    So += A[i-1][j-1];
+            }
+        }
+    }
+
+    printf("\n   Sp = %d, So = %d\n\n", Sp, So);
+
+    F = ((double)Sp+(double)So)/(Sp-So);
+
+    printf("   F = %lf\n\n\n", F);
+
+    end = 7;
     choice();
 }
 
@@ -307,6 +395,8 @@ int choice()
            case 5: fifth();
            break;
            case 6: sixth();
+           break;
+           case 7: seventh();
            break;
        }
     }
