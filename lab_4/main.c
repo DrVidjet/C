@@ -31,7 +31,6 @@ int main(void)
     system("pause");
 }
 
-
 void first()
 {
     int a, tic, i, temp, *A, ni, n;
@@ -287,6 +286,7 @@ void sixth()
     end = 6;
     choice();
 }
+
 int choice()
 {
     int choice;
