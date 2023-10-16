@@ -26,8 +26,6 @@ int main(void)
         break;
         case 6: sixth();
         break;
-        case 7: seventh();
-        break;
     }
 
     system("pause");
@@ -289,11 +287,6 @@ void fifth()
 }
 void sixth()
 {
-    end = 6;
-    choice();
-}
-void seventh()
-{
     int n, m, Sp, So;
     double F;
     int i, j;
@@ -371,7 +364,7 @@ void seventh()
 
     printf("   F = %lf\n\n\n", F);
 
-    end = 7;
+    end = 6;
     choice();
 }
 
@@ -395,8 +388,6 @@ int choice()
            case 5: fifth();
            break;
            case 6: sixth();
-           break;
-           case 7: seventh();
            break;
        }
     }
