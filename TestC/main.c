@@ -10,8 +10,11 @@ int main()
     scanf("%lf %lf", &x1, &y1);
     printf("Enter x2 and y2: ");
     scanf("%lf %lf", &x2, &y2);
-
-
+    if(x1 > 0 && y1 > 0 && x2 > 0 && y2 > 0 ||
+       x1 < 0 && y1 > 0 && x2 < 0 && y2 > 0 ||
+       x1 < 0 && y1 < 0 && x2 < 0 && y2 < 0 ||
+       x1 < 0 && y1 > 0 && x2 < 0 && y2 > 0)
+    {
     A = hypotf(x1, y1);
     B = hypotf(x2, y2);
 
@@ -23,6 +26,15 @@ int main()
 
     printf("A = %lf, B = %lf, C = %lf\n", A, B, C);
     printf("Result = %lf\n", rez);
+    }
+    else if( x1 == x2 || y1 == y2 )
+        printf("Oni lezat na odnoi pramoi\n");
+    else if (x1 > 0 && y1 > 0 && x2 < 0 && y2 > 0 ||
+             x1 < 0 && y1 < 0 && x2 > 0 && y2 < 0 ||
+             x1 > 0 && y1 > 0 && x2 > 0 && y2 < 0 ||
+             x1 < 0 && y1 < 0 && x2 < 0 && y2 > 0 )
+        printf("Oni lezat na odnoi polu-ploskosti\n");
+
 
     return 0;
 }
