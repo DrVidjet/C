@@ -9,6 +9,9 @@ int main(void)
 {
     int choice;
 
+    system("chcp 1251");
+    system("cls");
+
     printf("Enter the program number(1-6): ");
     scanf("%d", &choice);
 
@@ -383,6 +386,65 @@ void fouth()
 }
 void fifth()
 {
+    int S, L, P;
+    int i, j, k;
+    int dop, avt;
+
+    srand(time(0));
+
+    printf("Enter count of pages, labs and students: ");
+    scanf("%d %d %d", &P, &L, &S);
+
+    int A[P][L][S];
+
+    printf("Hi\n");
+
+    for(i = 0; i < P; i++)
+    {
+        for(j = 0; j < L; j++)
+        {
+            for(k = 0; k < S; k++)
+            {
+                A[i][j][k] = rand()%5;
+            }
+        }
+    }
+
+    for(i = 0; i < P; i++)
+    {
+        printf("\nPage(%d)\n\n", i+1);
+        for(j = 0; j < L; j++)
+        {
+            printf("Lab(%d) ", j+1);
+        printf("\n");
+        for(k = 0; k < S; k++)
+        {
+            printf("%d ", A[i][j][k]);
+        }
+        printf("\n");
+        }
+    }
+
+    printf("\n");
+    dop = 0;
+    avt = 0;
+    for(i = 0; i < P; i++)
+    {
+        for(j = 0; j < L; j++)
+        {
+            for(k = 0; k < S; k++)
+            {
+                if(A[i][j][k] == 3)
+                    dop += 1;
+                if(A[i][j][k] == 4)
+                    avt += 1;
+            }
+        }
+    }
+
+    printf("Number of students who have gained access to the exam: %d\n\n", dop);
+    printf("Number of students who have gained automatic on the exam: %d\n\n", avt);
+
     end = 5;
     choice();
 }
