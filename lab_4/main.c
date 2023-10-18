@@ -277,6 +277,107 @@ void third()
 }
 void fouth()
 {
+    int **A;
+    int n, m, temp;
+    int i, j;
+    bool h;
+
+    srand(time(NULL));
+
+    printf("Would you want to enter the numbers?(1 - yes, 0 - no) ");
+    scanf("%d", &h);
+
+    printf("Enter the number of rows and the number of columns: ");
+    scanf("%d %d", &n, &m);
+
+    A = (int**)malloc(n * sizeof(int*));
+
+    if(h)
+    {
+        for (i = 0; i<n; i++)
+        {
+            A[i] = (int*)malloc(m * sizeof(int));
+            for (j = 0; j<m; j++)
+            {
+                printf("a[%d][%d] = ", i+1, j+1);
+                scanf("%d", &A[i][j]);
+            }
+        }
+    }
+    else if(!h)
+    {
+        for (i = 0; i < n; i++)
+        {
+            A[i] = (int*)malloc(m * sizeof(int));
+            for (j = 0; j < m; j++)
+                A[i][j] = -100+rand()%200;
+        }
+    }
+
+    printf("\n\n");
+
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < m; j++)
+            printf(" %4d ", A[i][j]);
+
+        printf("\n");
+    }
+
+    printf("\n");
+
+    int a[n];
+
+    for(i = 0; i < n; i++)
+    {
+        for(j = 0; j < m; j++)
+        {
+            if(j == i)
+            {
+                a[i]=A[i][j];
+            }
+        }
+    }
+
+    for(i = 0; i < n-1; i++)
+        {
+            for(j = 0; j < n-i-1; j++)
+            {
+                if (a[j] > a[j+1])
+                {
+                    temp = a[j];
+                    a[j] = a[j+1];
+                    a[j+1] = temp;
+                }
+            }
+        }
+
+    for(i = 0; i < n; i++)
+    {
+        for(j = 0; j < m; j++)
+        {
+            if(j == i)
+            {
+                A[i][j] = a[i];
+            }
+        }
+    }
+
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < m; j++)
+            printf(" %4d ", A[i][j]);
+
+        printf("\n");
+    }
+
+    printf("\n");
+
+    for (i = 0; i < n-1; i++) {
+        free(A[i]);
+    }
+
+    free(A);
     end = 4;
     choice();
 }
