@@ -389,27 +389,46 @@ void fifth()
     int S, L, P;
     int i, j, k;
     int dop, avt;
+    bool h;
 
     srand(time(0));
+
+    printf("Would you want to enter the numbers?(1 - yes, 0 - no) ");
+    scanf("%d", &h);
 
     printf("Enter count of pages, labs and students: ");
     scanf("%d %d %d", &P, &L, &S);
 
     int A[P][L][S];
 
-    printf("Hi\n");
-
-    for(i = 0; i < P; i++)
+    if(h)
     {
-        for(j = 0; j < L; j++)
+        for(i = 0; i < P; i++)
         {
-            for(k = 0; k < S; k++)
+            printf("Page(%d)\n\n", i+1);
+            for(j = 0; j < L; j++)
             {
-                A[i][j][k] = rand()%5;
+                printf("Lab(%d)\n", j+1);
+                for(k = 0; k < S; k++)
+                {
+                    scanf("%d", &A[i][j][k]);
+                }
             }
         }
     }
-
+    else if(!h)
+    {
+        for(i = 0; i < P; i++)
+        {
+            for(j = 0; j < L; j++)
+            {
+                for(k = 0; k < S; k++)
+                {
+                    A[i][j][k] = rand()%5;
+                }
+            }
+        }
+    }
     for(i = 0; i < P; i++)
     {
         printf("\nPage(%d)\n\n", i+1);
