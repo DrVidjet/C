@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1698302558 source:c:\users\drvidjet\desktop\cbb c\lab_5\main.c
+	<stdlib.h>
+	<stdbool.h>
+	<malloc.h>
+

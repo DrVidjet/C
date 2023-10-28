@@ -9,9 +9,6 @@ int main(void)
 {
     int choice;
 
-    system("chcp 1251");
-    system("cls");
-
     printf("Enter the program number(1-6): ");
     scanf("%d", &choice);
 
