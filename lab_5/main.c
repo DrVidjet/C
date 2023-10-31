@@ -37,7 +37,7 @@ void first()
     a = (int*)malloc(d * sizeof(int));
     A = (int**)malloc(n * sizeof(int*));
 
-    for (i = 0; i<n; i++)
+    for(i = 0; i<n; i++)
         A[i] = (int*)malloc(m * sizeof(int));
 
     Enter2(A, n, m);
@@ -45,7 +45,7 @@ void first()
 
     printf("\n");
 
-    for (i = 0; i < n; i++)
+    for(i = 0; i < n; i++)
     {
         for (j = 0; j < m; j++)
             printf(" %4d ", A[i][j]);
@@ -83,15 +83,13 @@ void first()
 
     printf("\n%d rows\n\n", l);
 
-    for (i = 0; i < n-1; i++)
-        free(A[i]);
     free(A);
     end = 1;
     choice();
 }
 void second()
 {
-    int **A, **B, n, m, i, j, l, f, d, c, s;
+    int **A, **B, n, m, i, j, l, f, c, d;
 
     printf("Enter the number of rows and the number of columns: ");
     scanf("%d %d", &n, &m);
@@ -101,60 +99,54 @@ void second()
     B = (int**)malloc(l * sizeof(int*));
     A = (int**)malloc(n * sizeof(int*));
 
-    for (i = 0; i<n; i++)
+    for(i = 0; i<n; i++)
         A[i] = (int*)malloc(m * sizeof(int));
-    for (i = 0; i<l; i++)
-        B[i] = (int*)malloc(m * sizeof(int));
+    for(i = 0; i<l; i++)
+        B[i] = (int*)malloc(f * sizeof(int));
 
     Enter2(A, n, m);
     Enter2(B, l, f);
 
-    printf("\nbefore sort: \n\n");
+    printf("\n");
 
-    for (i = 0; i < n; i++)
+    for(i = 0; i < n; i++)
     {
-        for (j = 0; j < m; j++)
+        for(j = 0; j < m; j++)
             printf(" %4d ", A[i][j]);
 
         printf("\n");
     }
     printf("\n");
-    for (i = 0; i < l; i++)
+    for(i = 0; i < l; i++)
     {
-        for (j = 0; j < f; j++)
+        for(j = 0; j < f; j++)
             printf(" %4d ", B[i][j]);
 
         printf("\n");
     }
     printf("\n");
-
-    printf("Enter the column: ");
-    scanf("%d", &d);
-
-    delete(A, n, m, d);
-
-    m--;
+    c = 0;
+    for(i = 0; i < m; i++)
+    {
+        for(j = 0; j < n; j++)
+        {
+            if(A[j][i] < 0)
+                c ++;
+        }
+        if(c >= 2)
+            A[0][i] = 0;
+        c = 0;
+    }
 
     for(i = 0; i < n; i++)
-        A = (int*)realloc(A, m * sizeof(int));
-
-    printf("\nafter sort: \n\n");
-
-    for (i = 0; i < n; i++)
     {
-        for (j = 0; j < m; j++)
+        for(j = 0; j < m; j++)
             printf(" %4d ", A[i][j]);
 
         printf("\n");
     }
     printf("\n");
 
-    for (i = 0; i < n-1; i++)
-        free(A[i]);
-    free(A);
-    for (i = 0; i < l-1; i++)
-        free(B[i]);
-    free(B);
     end = 2;
     choice();
 }
@@ -163,12 +155,12 @@ void third()
     end = 3;
     choice();
 }
-int Enter2(int **A, int n, int m)
+void Enter2(int **A, int n, int m)
 {
     int i, j;
     bool h;
 
-    srand(time(0));
+    srand(time(NULL));
 
     printf("Would you want to enter the numbers?(1 - yes, 0 - no) ");
     scanf("%d", &h);
@@ -194,7 +186,7 @@ int Enter2(int **A, int n, int m)
     }
     return A;
 }
-int Enter1(int *a, int d)
+void Enter1(int *a, int d)
 {
     int i;
     bool h;
@@ -218,15 +210,22 @@ int Enter1(int *a, int d)
 
     return a;
 }
-int delete(int **A, int n, int m, int d)
+void delete(int **A, int n, int m, int d)
 {
-    int i, j, l;
+    int i, j, **B;
 
-        for(i = d; i < m; i++)
-            for(j = 0; j < n; j++)
-                    A[j][i] = A[j][i+1];
+    B = (int**)malloc(n * sizeof(int*))
 
-    return A;
+    for(i = 0; i < n; i++)
+        B = (int*)malloc((m-1) * sizeof(int))
+
+    for(i = 0; i < m; i++)
+    {
+        if(i != d)
+        for(j = 0; j < n; j++)
+            B[i][j] = A[i][j];
+    }
+
 }
 int choice()
 {
