@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1698753405 source:c:\users\drvidjet\desktop\cbb c\lab_5\main.c
+1698777139 source:c:\users\drvidjet\desktop\cbb c\lab_5\main.c
 	<stdlib.h>
 	<stdbool.h>
 	<malloc.h>
