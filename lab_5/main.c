@@ -83,13 +83,16 @@ void first()
 
     printf("\n%d rows\n\n", l);
 
+    free(a);
+    for(i = 0; i < n; i++)
+        free(A[i]);
     free(A);
     end = 1;
     choice();
 }
 void second()
 {
-    int **A, **B, **C, n, m, i, j, l, f, c, d, s;
+    int **A, **B, n, m, i, j, l, f, c, d, s;
 
     printf("Enter the number of rows and the number of columns: ");
     scanf("%d %d", &n, &m);
@@ -126,16 +129,6 @@ void second()
     }
     printf("\n");
 
-    C = (int**)malloc(n * sizeof(int*));
-    for(i = 0; i < n; i++)
-    {
-        C[i] = (int*)malloc(m * sizeof(int));
-        for(j = 0; j < m; j++)
-        {
-            C[i][j] = A[i][j];
-        }
-    }
-
     c = 0;
     s = 0;
 
@@ -143,22 +136,32 @@ void second()
     {
         for(j = 0; j < n; j++)
         {
-            if(C[j][i] < 0)
+            if(A[j][i] < 0)
                 c++;
         }
         if(c > 1)
         {
-            d = i;
-            delete(A, n, m, d);
+
+            A[0][i] = 1551;
             s++;
         }
         printf("c = %d, d = %d, s = %d\n", c, d, s);
         c = 0;
     }
+
+    for(i = 0; i < m; i++)
+    {
+        for(j = 0; j < n; j++)
+        {
+            if(A[0][i] == 1551)
+            {
+                d = i;
+                printf("d = %d\n", d);
+                delete(A, n, m, d);
+            }
+        }
+    }
     m -= s;
-    for(i = 0; i < n-1; i++)
-        free(C[i]);
-    free(C);
 
     printf("m = %d\n", m);
 
