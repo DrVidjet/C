@@ -129,11 +129,10 @@ void second()
     }
     printf("\n");
 
-    c = 0;
     s = 0;
-
     for(i = 0; i < m; i++)
     {
+        c = 0;
         for(j = 0; j < n; j++)
         {
             if(A[j][i] < 0)
@@ -142,33 +141,64 @@ void second()
         if(c > 1)
         {
 
-            A[0][i] = 1551;
+            A[0][i] = -15551;
             s++;
         }
-        printf("c = %d, d = %d, s = %d\n", c, d, s);
-        c = 0;
     }
-
     for(i = 0; i < m; i++)
     {
         for(j = 0; j < n; j++)
         {
-            if(A[0][i] == 1551)
+            if(A[0][i] == -15551)
             {
                 d = i;
-                printf("d = %d\n", d);
                 delete(A, n, m, d);
             }
         }
     }
     m -= s;
 
-    printf("m = %d\n", m);
+    s = 0;
+    for(i = 0; i < f; i++)
+    {
+        c = 0;
+        for(j = 0; j < l; j++)
+        {
+            if(B[j][i] < 0)
+                c++;
+        }
+        if(c > 2)
+        {
+            B[0][i] = -15551;
+            s++;
+        }
+    }
+    for(i = 0; i < m; i++)
+    {
+        for(j = 0; j < n; j++)
+        {
+            if(B[0][i] == -15551)
+            {
+                d = i;
+                delete(B, l, f, d);
+            }
+        }
+    }
+    f -= s;
 
     for(i = 0; i < n; i++)
     {
         for(j = 0; j < m; j++)
             printf(" %4d ", A[i][j]);
+
+        printf("\n");
+    }
+    printf("\n");
+
+    for(i = 0; i < l; i++)
+    {
+        for(j = 0; j < f; j++)
+            printf(" %4d ", B[i][j]);
 
         printf("\n");
     }
@@ -185,6 +215,16 @@ void second()
 }
 void third()
 {
+    float y;
+    int N, a, b;
+
+    printf("Enter the numbers a, b, N: ");
+    scanf("%d %d %d", &a, &b, &N);
+
+    y = inl(a, b, N);
+
+    printf("y = %lf\n", y);
+
     end = 3;
     choice();
 }
@@ -252,6 +292,23 @@ void delete(int **A, int n, int m, int d)
             A[j][i] = A[j][i+1];
 
     return A;
+}
+float f(float x)
+{
+    return (1+sin(x)/(1+cos(x)));
+}
+void inl(const int a, const int b, const int N)
+{
+    float h, S, x;
+    h =(double)(b-a)/N;
+    S = 0;
+    for(int i = 0; i < N-1; i++)
+    {
+        x = a+i*h;
+        S = S+f(x);
+    }
+    S *= h;
+    return S;
 }
 int choice()
 {

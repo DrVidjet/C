@@ -4,16 +4,19 @@
 	<ActiveTarget name="Release" />
 	<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2110" topLine="23" />
+			<Cursor1 position="4159" topLine="0" />
 		</Cursor>
 		<Folding>
 			<Collapse line="7" />
 			<Collapse line="27" />
-			<Collapse line="183" />
-			<Collapse line="188" />
-			<Collapse line="219" />
-			<Collapse line="243" />
-			<Collapse line="253" />
+			<Collapse line="93" />
+			<Collapse line="216" />
+			<Collapse line="231" />
+			<Collapse line="262" />
+			<Collapse line="286" />
+			<Collapse line="296" />
+			<Collapse line="300" />
+			<Collapse line="313" />
 		</Folding>
 	</File>
 </CodeBlocks_layout_file>
