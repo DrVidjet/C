@@ -89,18 +89,18 @@ void first()
 }
 void second()
 {
-    int **A, **B, n, m, i, j, l, f, c, d;
+    int **A, **B, **C, n, m, i, j, l, f, c, d, s;
 
     printf("Enter the number of rows and the number of columns: ");
     scanf("%d %d", &n, &m);
     printf("Enter the number of rows and the number of columns: ");
     scanf("%d %d", &l, &f);
 
-    B = (int**)malloc(l * sizeof(int*));
     A = (int**)malloc(n * sizeof(int*));
-
     for(i = 0; i<n; i++)
         A[i] = (int*)malloc(m * sizeof(int));
+
+    B = (int**)malloc(l * sizeof(int*));
     for(i = 0; i<l; i++)
         B[i] = (int*)malloc(f * sizeof(int));
 
@@ -125,18 +125,42 @@ void second()
         printf("\n");
     }
     printf("\n");
+
+    C = (int**)malloc(n * sizeof(int*));
+    for(i = 0; i < n; i++)
+    {
+        C[i] = (int*)malloc(m * sizeof(int));
+        for(j = 0; j < m; j++)
+        {
+            C[i][j] = A[i][j];
+        }
+    }
+
     c = 0;
+    s = 0;
+
     for(i = 0; i < m; i++)
     {
         for(j = 0; j < n; j++)
         {
-            if(A[j][i] < 0)
-                c ++;
+            if(C[j][i] < 0)
+                c++;
         }
-        if(c >= 2)
-            A[0][i] = 0;
+        if(c > 1)
+        {
+            d = i;
+            delete(A, n, m, d);
+            s++;
+        }
+        printf("c = %d, d = %d, s = %d\n", c, d, s);
         c = 0;
     }
+    m -= s;
+    for(i = 0; i < n-1; i++)
+        free(C[i]);
+    free(C);
+
+    printf("m = %d\n", m);
 
     for(i = 0; i < n; i++)
     {
@@ -147,6 +171,12 @@ void second()
     }
     printf("\n");
 
+    for(i = 0; i < n-1; i++)
+        free(A[i]);
+    free(A);
+    for(i = 0; i < l-1; i++)
+        free(B[i]);
+    free(B);
     end = 2;
     choice();
 }
@@ -212,20 +242,13 @@ void Enter1(int *a, int d)
 }
 void delete(int **A, int n, int m, int d)
 {
-    int i, j, **B;
+    int i, j;
 
-    B = (int**)malloc(n * sizeof(int*))
-
-    for(i = 0; i < n; i++)
-        B = (int*)malloc((m-1) * sizeof(int))
-
-    for(i = 0; i < m; i++)
-    {
-        if(i != d)
+    for(i = d; i < m; i++)
         for(j = 0; j < n; j++)
-            B[i][j] = A[i][j];
-    }
+            A[j][i] = A[j][i+1];
 
+    return A;
 }
 int choice()
 {

@@ -373,10 +373,8 @@ void fouth()
 
     printf("\n");
 
-    for (i = 0; i < n-1; i++) {
+    for (i = 0; i < n-1; i++)
         free(A[i]);
-    }
-
     free(A);
     end = 4;
     choice();
@@ -546,7 +544,6 @@ void sixth()
     end = 6;
     choice();
 }
-
 int choice()
 {
     int choice;
