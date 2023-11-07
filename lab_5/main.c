@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <malloc.h>
+#include <stdio.h>
 
 int end;
 
@@ -100,17 +101,16 @@ void second()
     scanf("%d %d", &l, &f);
 
     A = (int**)malloc(n * sizeof(int*));
-    for(i = 0; i<n; i++)
-        A[i] = (int*)malloc(m * sizeof(int));
-
     B = (int**)malloc(l * sizeof(int*));
-    for(i = 0; i<l; i++)
+    for(i = 0; i < n; i++)
+        A[i] = (int*)malloc(m * sizeof(int));
+    for(i = 0; i < l; i++)
         B[i] = (int*)malloc(f * sizeof(int));
 
     Enter2(A, n, m);
     Enter2(B, l, f);
 
-    printf("\n");
+    printf("\nBefore sort: \n\n");
 
     for(i = 0; i < n; i++)
     {
@@ -140,8 +140,7 @@ void second()
         }
         if(c > 1)
         {
-
-            A[0][i] = -15551;
+            A[0][i] = -1555;
             s++;
         }
     }
@@ -149,7 +148,7 @@ void second()
     {
         for(j = 0; j < n; j++)
         {
-            if(A[0][i] == -15551)
+            if(A[0][i] == -1555)
             {
                 d = i;
                 delete(A, n, m, d);
@@ -169,7 +168,7 @@ void second()
         }
         if(c > 2)
         {
-            B[0][i] = -15551;
+            B[0][i] = -1555;
             s++;
         }
     }
@@ -177,7 +176,7 @@ void second()
     {
         for(j = 0; j < n; j++)
         {
-            if(B[0][i] == -15551)
+            if(B[0][i] == -1555)
             {
                 d = i;
                 delete(B, l, f, d);
@@ -185,6 +184,8 @@ void second()
         }
     }
     f -= s;
+
+    printf("\nAfter sort: \n\n");
 
     for(i = 0; i < n; i++)
     {
@@ -215,20 +216,10 @@ void second()
 }
 void third()
 {
-    float y;
-    int N, a, b;
-
-    printf("Enter the numbers a, b, N: ");
-    scanf("%d %d %d", &a, &b, &N);
-
-    y = inl(a, b, N);
-
-    printf("y = %lf\n", y);
-
     end = 3;
     choice();
 }
-void Enter2(int **A, int n, int m)
+int Enter2(int **A, int n, int m)
 {
     int i, j;
     bool h;
@@ -259,7 +250,7 @@ void Enter2(int **A, int n, int m)
     }
     return A;
 }
-void Enter1(int *a, int d)
+int Enter1(int *a, int d)
 {
     int i;
     bool h;
@@ -283,7 +274,7 @@ void Enter1(int *a, int d)
 
     return a;
 }
-void delete(int **A, int n, int m, int d)
+int delete(int **A, int n, int m, int d)
 {
     int i, j;
 
@@ -292,23 +283,6 @@ void delete(int **A, int n, int m, int d)
             A[j][i] = A[j][i+1];
 
     return A;
-}
-float f(float x)
-{
-    return (1+sin(x)/(1+cos(x)));
-}
-void inl(const int a, const int b, const int N)
-{
-    float h, S, x;
-    h =(double)(b-a)/N;
-    S = 0;
-    for(int i = 0; i < N-1; i++)
-    {
-        x = a+i*h;
-        S = S+f(x);
-    }
-    S *= h;
-    return S;
 }
 int choice()
 {

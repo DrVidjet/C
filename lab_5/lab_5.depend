@@ -1,6 +1,7 @@
 # depslib dependency file v1.0
-1698841614 source:c:\users\drvidjet\desktop\cbb c\lab_5\main.c
+1698931127 source:c:\users\drvidjet\desktop\cbb c\lab_5\main.c
 	<stdlib.h>
 	<stdbool.h>
 	<malloc.h>
+	<stdio.h>
 
