@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <malloc.h>
 #include <stdio.h>
+#include <math.h>
 
 int end;
 
@@ -216,8 +217,36 @@ void second()
 }
 void third()
 {
+    double a, b, in;
+    int N;
+
+    printf("Enter a, b, N: ");
+    scanf("%lf %lf %d", &a, &b, &N);
+
+    in = integral(a, b, N);
+
+    printf("in = %lf\n", in);
+
     end = 3;
     choice();
+}
+void integral(double a, double b, int N)
+{
+    double in;
+
+    double r;
+    r = hypotf(a, b);
+
+    for(int i = 0; i < N; i++)
+    {
+
+    }
+
+    in = r;
+
+    printf("r = %lf, in = %lf\n", r, in);
+
+    return in;
 }
 int Enter2(int **A, int n, int m)
 {
@@ -284,7 +313,7 @@ int delete(int **A, int n, int m, int d)
 
     return A;
 }
-int choice()
+void choice()
 {
     int choice;
     printf("1 - repeat the program, 2 - go back to the menu, 3 - exit the program\n");
@@ -304,5 +333,5 @@ int choice()
     else if(choice == 2)
         main();
     else if(choice == 3)
-        system("exit");
+        exit;
 }
