@@ -2,8 +2,11 @@
 #include <stdbool.h>
 #include <malloc.h>
 #include <stdio.h>
+#define dx (double)(b-a)/N
 
 int end;
+
+double f(double x, int v);
 
 int main(void)
 {
@@ -216,8 +219,45 @@ void second()
 }
 void third()
 {
+    int i, N;
+    double a, b, x, y, s;
+
+    printf("Enter a, b, N: ");
+    scanf("%lf %lf %d", &a, &b, &N);
+
+    for(s = 0, x = a, i = 1; i<=N; i++)
+    {
+        y = -f(x, 1);
+        s += y*dx;
+        x += dx;
+    }
+
+    printf("\ns = %.2lf\n", s);
+
+    printf("\nEnter a, b, N: ");
+    scanf("%lf %lf %d", &a, &b, &N);
+
+    for(s = 0, x = a, i = 1; i<=N; i++)
+    {
+        y = -f(x, 2);
+        s += y*dx;
+        x += dx;
+    }
+    printf("\ns = %.2lf\n\n", s);
+
     end = 3;
     choice();
+}
+double f(double x, int v)
+{
+    double y;
+
+    if(v == 1)
+        y = 2*x*(x*x+1);
+    else if(v == 2)
+        y = log(x*x+1);
+
+    return y;
 }
 int Enter2(int **A, int n, int m)
 {
