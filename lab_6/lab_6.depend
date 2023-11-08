@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1699443667 source:c:\users\drvidjet\desktop\cbb c\lab_6\main.c
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+
