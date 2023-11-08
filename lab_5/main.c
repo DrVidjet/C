@@ -2,11 +2,9 @@
 #include <stdbool.h>
 #include <malloc.h>
 #include <stdio.h>
-#define dx (double)(b-a)/N
+#include <math.h>
 
 int end;
-
-double f(double x, int v);
 
 int main(void)
 {
@@ -219,45 +217,36 @@ void second()
 }
 void third()
 {
-    int i, N;
-    double a, b, x, y, s;
+    double a, b, in;
+    int N;
 
     printf("Enter a, b, N: ");
     scanf("%lf %lf %d", &a, &b, &N);
 
-    for(s = 0, x = a, i = 1; i<=N; i++)
-    {
-        y = -f(x, 1);
-        s += y*dx;
-        x += dx;
-    }
+    in = integral(a, b, N);
 
-    printf("\ns = %.2lf\n", s);
-
-    printf("\nEnter a, b, N: ");
-    scanf("%lf %lf %d", &a, &b, &N);
-
-    for(s = 0, x = a, i = 1; i<=N; i++)
-    {
-        y = -f(x, 2);
-        s += y*dx;
-        x += dx;
-    }
-    printf("\ns = %.2lf\n\n", s);
+    printf("in = %lf\n", in);
 
     end = 3;
     choice();
 }
-double f(double x, int v)
+void integral(double a, double b, int N)
 {
-    double y;
+    double in;
 
-    if(v == 1)
-        y = 2*x*(x*x+1);
-    else if(v == 2)
-        y = log(x*x+1);
+    double r;
+    r = hypotf(a, b);
 
-    return y;
+    for(int i = 0; i < N; i++)
+    {
+
+    }
+
+    in = r;
+
+    printf("r = %lf, in = %lf\n", r, in);
+
+    return in;
 }
 int Enter2(int **A, int n, int m)
 {
@@ -324,7 +313,7 @@ int delete(int **A, int n, int m, int d)
 
     return A;
 }
-int choice()
+void choice()
 {
     int choice;
     printf("1 - repeat the program, 2 - go back to the menu, 3 - exit the program\n");
@@ -344,5 +333,5 @@ int choice()
     else if(choice == 2)
         main();
     else if(choice == 3)
-        system("exit");
+        exit;
 }
