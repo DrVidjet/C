@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <malloc.h>
 
 int end;
 
@@ -7,7 +8,7 @@ int main(void)
 {
     int choice;
 
-    printf("Enter the program number(1-6): ");
+    printf("Enter the program number(1-4): ");
     scanf("%d", &choice);
 
     switch(choice)
@@ -24,8 +25,29 @@ int main(void)
 
     system("pause");
 }
+
 void first()
 {
+    char *filename;
+    filename = (char*)malloc(15);
+    int i, c;
+
+    fflush(stdin);
+    scanf("%s", filename);
+
+    FILE *fp = fopen(filename, "r+");
+    char buffer[256];
+
+    if(fp)
+    {
+        while((fgets(buffer, 256, fp)) != NULL)
+        {
+            printf("%s", buffer);
+            fclose(fp);
+            printf("\nWritten!\n");
+        }
+
+    free(filename);
     end = 1;
     choice();
 }
