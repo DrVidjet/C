@@ -48,7 +48,6 @@ void second()
     str = (char*)malloc(50);
     char sep[1] = ".";
     int i, c = 0;
-
     char temp;
 
     printf("Enter some text: ");
