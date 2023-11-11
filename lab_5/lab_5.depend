@@ -1,8 +1,7 @@
 # depslib dependency file v1.0
-1699373832 source:c:\users\drvidjet\desktop\cbb c\lab_5\main.c
+1699433441 source:c:\users\drvidjet\desktop\cbb c\lab_5\main.c
 	<stdlib.h>
 	<stdbool.h>
 	<malloc.h>
 	<stdio.h>
-	<math.h>
 
