@@ -6,7 +6,9 @@
 
 int end;
 
-double f(double x, int v);
+double in(double a, double b, int N, double (*f)(double x));
+double f1(double x);
+double f2(double x);
 
 int main(void)
 {
@@ -220,43 +222,53 @@ void second()
 void third()
 {
     int i, N;
-    double a, b, x, y, s;
+    double a, b, y, s;
+    double (*f)(double x, int);
 
     printf("Enter a, b, N: ");
     scanf("%lf %lf %d", &a, &b, &N);
 
-    for(s = 0, x = a, i = 1; i<=N; i++)
-    {
-        y = -f(x, 1);
-        s += y*dx;
-        x += dx;
-    }
+    f = f1;
+
+    s = in(a, b, N, f);
 
     printf("\ns = %.2lf\n", s);
 
     printf("\nEnter a, b, N: ");
     scanf("%lf %lf %d", &a, &b, &N);
 
-    for(s = 0, x = a, i = 1; i<=N; i++)
-    {
-        y = -f(x, 2);
-        s += y*dx;
-        x += dx;
-    }
+    f = f2;
+
+    s = in(a, b, N, f);
+
     printf("\ns = %.2lf\n\n", s);
 
     end = 3;
     choice();
 }
-double f(double x, int v)
+double in(double a, double b, int N, double (*f)(double x))
+{
+    double s, x, y;
+    int i;
+
+    for(s = 0, x = a, i = 1; i<=N; i++)
+    {
+        y = -f(x);
+        s += y*dx;
+        x += dx;
+    }
+    return s;
+}
+double f1(double x)
 {
     double y;
-
-    if(v == 1)
         y = 2*x*(x*x+1);
-    else if(v == 2)
+    return y;
+}
+double f2(double x)
+{
+    double y;
         y = log(x*x+1);
-
     return y;
 }
 int Enter2(int **A, int n, int m)
