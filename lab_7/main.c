@@ -4,28 +4,50 @@
 #include <string.h>
 #include <stdbool.h>
 
-int end;
+void first();
+void second();
+void third();
+void fouth();
 
-int main(void)
+int l = 0, ch;
+
+int main()
 {
-    int choice;
+    int end;
 
-    printf("Enter the program number(1-4): ");
-    scanf("%d", &choice);
+    void (*funcs[4])();
 
-    switch(choice)
+    funcs[0] = first;
+    funcs[1] = second;
+    funcs[2] = third;
+    funcs[3] = fouth;
+
+    if(l == 0)
     {
-        case 1: first();
-        break;
-        case 2: second();
-        break;
-        case 3: third();
-        break;
-        case 4: fouth();
-        break;
+        printf("Enter the program number(1-4): ");
+        scanf("%d", &ch);
+        l++;
+        funcs[ch-1]();
     }
+    else
+    {
+        printf("1 - repeat the program, 2 - go back to the menu, 3 - exit the program\n");
+        scanf("%d", &end);
 
-    system("pause");
+        switch(end)
+        {
+            case 1:
+                funcs[ch-1]();
+                break;
+            case 2:
+                printf("Enter the program number(1-4): ");
+                scanf("%d", &ch);
+                funcs[ch-1]();
+                break;
+            case 3:
+                return 0;
+        }
+    }
 }
 
 void first()
@@ -40,102 +62,60 @@ void first()
     scanf("%s", filename);
 
     FILE *fp = fopen(filename, "r+");
-    char *buffer;
-    char *postbuffer;
-    postbuffer = (char*)malloc(256);
-    buffer = (char*)malloc(256);
+
+    char buffer[256];
+    char postbuffer[256];
 
     if(fp)
     {
         while((fgets(buffer, 256, fp)) != NULL)
         {
-            buffer = realloc(buffer, strlen(buffer));
-            postbuffer = realloc(postbuffer, strlen(buffer));
             for(i = 0; i < strlen(buffer); i++)
             {
                 if(buffer[i] == 'o' || buffer[i] == 'O')
-                {
                     c++;
-                }
                 else if(buffer[i] == ' ')
                 {
                     if(c > 1)
+                        prov = 0;
+                    else
                         prov = 1;
                     c = 0;
                 }
                 else if(buffer[i] == '.')
                 {
-                    if(prov == 0)
+                    if(prov)
                     {
-                        for(j = d; j < i; j++)
+                        for(j = d; j < i+2; j++)
                         {
-                            postbuffer[b] = buffer[j+2];
-                            //printf("buffer[%d] = %c, postbuffer[%d] = %c\n", j, buffer[j], b, postbuffer[b]);
+                            postbuffer[b] = buffer[j];
                             b++;
                         }
                     }
                     prov = 0;
-                    d = i;
+                    d = i+2;
                 }
             }
-
-
-            postbuffer = realloc(postbuffer, b);
             //Hollow knight. Hello knight.
-            fclose(fp);
-            remove(filename);
-            FILE *fp = fopen(filename, "w+");
-            fprintf(fp, buffer);
-            printf("Before:\n\n%s\n\n", buffer);
-
-            printf("After:\n\n");
-            for(i = 0; i < b; i++)
-                printf("%c", postbuffer[i]);
-            printf("\n\n");
         }
+        fclose(fp);
+        remove(fp);
+        FILE *fl = fopen(filename, "w+");
+        fprintf_s(fl, postbuffer);
+        fclose(fl);
+        printf("Task well done!\n");
     }
-
-    free(postbuffer);
-    free(filename);
-    end = 1;
-    choice();
+    main();
 }
 void second()
 {
-    end = 2;
-    choice();
+    main();
 }
 void third()
 {
-    end = 3;
-    choice();
+    main();
 }
 void fouth()
 {
-    end = 4;
-    choice();
-}
-int choice()
-{
-    int choice;
-    printf("1 - repeat the program, 2 - go back to the menu, 3 - exit the program\n");
-    scanf("%d", &choice);
-    if(choice == 1)
-    {
-       switch(end)
-       {
-           case 1: first();
-           break;
-           case 2: second();
-           break;
-           case 3: third();
-           break;
-           case 4: fouth();
-           break;
-       }
-    }
-    else if(choice == 2)
-        main();
-    else if(choice == 3)
-        system("exit");
+    main();
 }

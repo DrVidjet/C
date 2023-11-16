@@ -46,7 +46,6 @@ void second()
     char pstr[50];
     char *str;
     str = (char*)malloc(50);
-    char sep[1] = ".";
     int i, c = 0;
     char temp;
 

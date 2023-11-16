@@ -223,23 +223,18 @@ void third()
 {
     int i, N;
     double a, b, y, s;
-    double (*f)(double x, int);
 
     printf("Enter a, b, N: ");
     scanf("%lf %lf %d", &a, &b, &N);
 
-    f = f1;
-
-    s = in(a, b, N, f);
+    s = in(a, b, N, f1);
 
     printf("\ns = %.2lf\n", s);
 
     printf("\nEnter a, b, N: ");
     scanf("%lf %lf %d", &a, &b, &N);
 
-    f = f2;
-
-    s = in(a, b, N, f);
+    s = in(a, b, N, f2);
 
     printf("\ns = %.2lf\n\n", s);
 
