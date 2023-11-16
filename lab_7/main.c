@@ -9,11 +9,9 @@ void second();
 void third();
 void fouth();
 
-int l = 0, ch;
-
 int main()
 {
-    int end;
+    int ch;
 
     void (*funcs[4])();
 
@@ -22,32 +20,13 @@ int main()
     funcs[2] = third;
     funcs[3] = fouth;
 
-    if(l == 0)
-    {
-        printf("Enter the program number(1-4): ");
+        printf("Enter the program number(1-4) or 0 for exit: ");
         scanf("%d", &ch);
-        l++;
-        funcs[ch-1]();
-    }
-    else
-    {
-        printf("1 - repeat the program, 2 - go back to the menu, 3 - exit the program\n");
-        scanf("%d", &end);
 
-        switch(end)
-        {
-            case 1:
-                funcs[ch-1]();
-                break;
-            case 2:
-                printf("Enter the program number(1-4): ");
-                scanf("%d", &ch);
-                funcs[ch-1]();
-                break;
-            case 3:
-                return 0;
-        }
-    }
+        if(ch != 0)
+            funcs[ch-1]();
+        else
+            return 0;
 }
 
 void first()
