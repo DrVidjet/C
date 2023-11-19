@@ -22,6 +22,7 @@ int main()
 
         printf("Enter the program number(1-4) or 0 for exit: ");
         scanf("%d", &ch);
+        fflush(stdin);
 
         if(ch != 0)
             funcs[ch-1]();

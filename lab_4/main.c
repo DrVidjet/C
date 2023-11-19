@@ -3,32 +3,33 @@
 #include <stdbool.h>
 #include <malloc.h>
 
-int end;
+void first();
+void second();
+void third();
+void fouth();
+void fifth();
+void sixth();
 
-int main(void)
+int main()
 {
-    int choice;
+    int ch;
 
-    printf("Enter the program number(1-6): ");
-    scanf("%d", &choice);
+    void (*funcs[6])();
 
-    switch(choice)
-    {
-        case 1: first();
-        break;
-        case 2: second();
-        break;
-        case 3: third();
-        break;
-        case 4: fouth();
-        break;
-        case 5: fifth();
-        break;
-        case 6: sixth();
-        break;
-    }
+    funcs[0] = first;
+    funcs[1] = second;
+    funcs[2] = third;
+    funcs[3] = fouth;
+    funcs[4] = fifth;
+    funcs[5] = sixth;
 
-    system("pause");
+        printf("Enter the program number(1-6) or 0 for exit: ");
+        scanf("%d", &ch);
+
+        if(ch != 0)
+            funcs[ch-1]();
+        else
+            return 0;
 }
 
 void first()
@@ -113,8 +114,8 @@ void first()
     printf("\n\n");
 
     free(A);
-    end = 1;
-    choice();
+
+    main();
 }
 void second()
 {
@@ -183,8 +184,8 @@ void second()
         printf("\n");
     }
     free(A);
-    end = 2;
-    choice();
+
+    main();
 }
 void third()
 {
@@ -272,8 +273,8 @@ void third()
         free(A[i]);
     }
     free(A);
-    end = 3;
-    choice();
+
+    main();
 }
 void fouth()
 {
@@ -376,8 +377,8 @@ void fouth()
     for (i = 0; i < n-1; i++)
         free(A[i]);
     free(A);
-    end = 4;
-    choice();
+
+    main();
 }
 void fifth()
 {
@@ -459,8 +460,7 @@ void fifth()
     printf("Number of students who have gained access to the exam: %d\n\n", dop);
     printf("Number of students who have gained automatic on the exam: %d\n\n", avt);
 
-    end = 5;
-    choice();
+    main();
 }
 void sixth()
 {
@@ -541,34 +541,5 @@ void sixth()
 
     printf("   F = %lf\n\n\n", F);
 
-    end = 6;
-    choice();
-}
-int choice()
-{
-    int choice;
-    printf("1 - repeat the program, 2 - go back to the menu, 3 - exit the program\n");
-    scanf("%d", &choice);
-    if(choice == 1)
-    {
-       switch(end)
-       {
-           case 1: first();
-           break;
-           case 2: second();
-           break;
-           case 3: third();
-           break;
-           case 4: fouth();
-           break;
-           case 5: fifth();
-           break;
-           case 6: sixth();
-           break;
-       }
-    }
-    else if(choice == 2)
-        main();
-    else if(choice == 3)
-        system("exit");
+    main();
 }

@@ -9,38 +9,39 @@
 
 
 int factor;
-int end;
+void first();
+void second();
+void third();
+void fouth();
+void fifth();
+void sixth();
+void seventh();
+void eighth();
+void nineth();
 
-int main(void)
+int main()
 {
-    int choice;
+    int ch;
 
-    printf("Enter the program number(1-9): ");
-    scanf("%d", &choice);
+    void (*funcs[9])();
 
-    switch(choice)
-    {
-        case 1: first();
-        break;
-        case 2: second();
-        break;
-        case 3: third();
-        break;
-        case 4: fouth();
-        break;
-        case 5: fifth();
-        break;
-        case 6: sixth();
-        break;
-        case 7: seventh();
-        break;
-        case 8: eighth();
-        break;
-        case 9: nineth();
-        break;
-    }
+    funcs[0] = first;
+    funcs[1] = second;
+    funcs[2] = third;
+    funcs[3] = fouth;
+    funcs[4] = fifth;
+    funcs[5] = sixth;
+    funcs[6] = seventh;
+    funcs[7] = eighth;
+    funcs[8] = nineth;
 
-    system("pause");
+        printf("Enter the program number(1-9) or 0 for exit: ");
+        scanf("%d", &ch);
+
+        if(ch != 0)
+            funcs[ch-1]();
+        else
+            return 0;
 }
 
 void first()
@@ -54,16 +55,19 @@ void first()
     {
         f = m/k;
         printf("f=%lf\n", f);
-    } else if(k<=0 || m<0)
+    }
+    else if(k<=0 || m<0)
     {
         f = m+k;
         printf("f=%lf\n", f);
-    } else {
+    }
+    else
+    {
         f = k*m;
         printf("f=%lf\n", f);
     }
-    end = 1;
-    choice();
+
+    main();
 }
 void second()
 {
@@ -79,9 +83,10 @@ void second()
     if(a == 0 || b == 0)
     {
         printf("The values do not belong to the scope of the function definition!\n");
-        end = 2;
-        choice();
-    } else {
+        main();
+    }
+    else
+    {
     c = powf(M_E, -1./6)*powf(pow(a, 2)+logf(abs(b)), 1./2)-tanf(a);
     d = 2*powf(cosf(powf(a, 3)), 2);
 
@@ -89,8 +94,7 @@ void second()
 
     printf("D = %lf\n", D);
 
-    end = 2;
-    choice();
+    main();
     }
 }
 void third()
@@ -145,8 +149,7 @@ void third()
             printf("Points equally distant: a(%.1lf; %.1lf), b(%.1lf; %.1lf)\n", ax, ay, bx, by);
     }
 
-    end = 3;
-    choice();
+    main();
 }
 void fouth()
 {
@@ -167,8 +170,7 @@ void fouth()
     c *= a;
     printf("%lf\n", c);
 
-    end = 4;
-    choice();
+    main();
 }
 void fifth()
 {
@@ -205,8 +207,7 @@ void fifth()
     }
     printf("%d\n", i);
 
-    end = 5;
-    choice();
+    main();
 }
 void sixth()
 {
@@ -240,8 +241,7 @@ void sixth()
     else
         printf("The verification digit %d is not in the number %d\n", v, num);
 
-    end = 6;
-    choice();
+    main();
 }
 void seventh()
 {
@@ -259,8 +259,7 @@ void seventh()
 
     printf("s = %lf\ne^%.0lf-e^%.0lf/2 = %lf\n", s, x, -x, sinh(x));//powf(M_E, x)-pow(M_E, -x)/2);
 
-    end = 7;
-    choice();
+    main();
 }
 void eighth()
 {
@@ -274,8 +273,7 @@ void eighth()
         if(x < 0.1 || x > 1)
         {
             printf("You have entered an invalid value.\n");
-            end = 8;
-            choice();
+            main();
         }
 
     a = 1;
@@ -299,8 +297,7 @@ void eighth()
 
     printf("s = %.6lf\n(1+2%.1lf^2)e^%.1lf^2 = %.6lf\n", s, x, x, (1+2*x*x)*pow(M_E, powf(x, 2)));
 
-    end = 8;
-    choice();
+    main();
 }
 void nineth()
 {
@@ -337,44 +334,8 @@ void nineth()
 
     printf("Result = %d\n", l);
 
-    end = 9;
-    choice();
+    main();
 }
-
-int choice()
-{
-    int choice;
-    printf("1 - repeat the program, 2 - go back to the menu, 3 - exit the program\n");
-    scanf("%d", &choice);
-    if(choice == 1)
-    {
-       switch(end)
-       {
-           case 1: first();
-           break;
-           case 2: second();
-           break;
-           case 3: third();
-           break;
-           case 4: fouth();
-           break;
-           case 5: fifth();
-           break;
-           case 6: sixth();
-           break;
-           case 7: seventh();
-           break;
-           case 8: eighth();
-           break;
-           case 9: nineth();
-       }
-       }
-    else if(choice == 2)
-        main();
-    else if(choice == 3)
-        system("exit");
-}
-
 int factorial(factor)
 {
     if(factor == 1 || factor == 0)

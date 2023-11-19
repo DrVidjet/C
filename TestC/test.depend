@@ -9,8 +9,7 @@
 	<stdlib.h>
 	<math.h>
 
-1698930382 source:c:\users\drvidjet\desktop\cbb c\testc\main.c
+1700123834 source:c:\users\drvidjet\desktop\cbb c\testc\main.c
+	<stdio.h>
 	<stdlib.h>
-	<stdbool.h>
-	<malloc.h>
 

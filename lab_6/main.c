@@ -2,25 +2,26 @@
 #include <stdio.h>
 #include <string.h>
 
-int end;
+void first();
+void second();
 
-int main(void)
+int main()
 {
-    int choice;
+    int ch;
 
-    printf("Enter the program number(1-2): ");
-    scanf("%d", &choice);
-    fflush(stdin);
+    void (*funcs[2])();
 
-    switch(choice)
-    {
-        case 1: first();
-        break;
-        case 2: second();
-        break;
-    }
+    funcs[0] = first;
+    funcs[1] = second;
 
-    system("pause");
+        printf("Enter the program number(1-2) or 0 for exit: ");
+        scanf("%d", &ch);
+        fflush(stdin);
+
+        if(ch != 0)
+            funcs[ch-1]();
+        else
+            return 0;
 }
 
 void first()
@@ -38,8 +39,7 @@ void first()
     else
         printf("\nThe entered sequence of characters is not a number!\n\n");
 
-    end = 1;
-    choice();
+    main();
 }
 void second()
 {
@@ -81,29 +81,7 @@ void second()
         }
     }
 
-    puts(pstr);
+    printf_s("%s\n", pstr);
 
-    end = 2;
-    choice();
-}
-int choice()
-{
-    int choice;
-    printf("1 - repeat the program, 2 - go back to the menu, 3 - exit the program\n");
-    scanf("%d", &choice);
-    fflush(stdin);
-    if(choice == 1)
-    {
-       switch(end)
-       {
-           case 1: first();
-           break;
-           case 2: second();
-           break;
-       }
-    }
-    else if(choice == 2)
-        main();
-    else if(choice == 3)
-        system("exit");
+    main();
 }

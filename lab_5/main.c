@@ -9,25 +9,27 @@ int end;
 double in(double a, double b, int N, double (*f)(double x));
 double f1(double x);
 double f2(double x);
+void first();
+void second();
+void third();
 
-int main(void)
+int main()
 {
-    int choice;
+    int ch;
 
-    printf("Enter the program number(1-3): ");
-    scanf("%d", &choice);
+    void (*funcs[3])();
 
-    switch(choice)
-    {
-        case 1: first();
-        break;
-        case 2: second();
-        break;
-        case 3: third();
-        break;
-    }
+    funcs[0] = first;
+    funcs[1] = second;
+    funcs[2] = third;
 
-    system("pause");
+        printf("Enter the program number(1-3) or 0 for exit: ");
+        scanf("%d", &ch);
+
+        if(ch != 0)
+            funcs[ch-1]();
+        else
+            return 0;
 }
 
 void first()
@@ -93,8 +95,8 @@ void first()
     for(i = 0; i < n; i++)
         free(A[i]);
     free(A);
-    end = 1;
-    choice();
+
+    main();
 }
 void second()
 {
@@ -216,8 +218,8 @@ void second()
     for(i = 0; i < l-1; i++)
         free(B[i]);
     free(B);
-    end = 2;
-    choice();
+
+    main();
 }
 void third()
 {
@@ -238,8 +240,7 @@ void third()
 
     printf("\ns = %.2lf\n\n", s);
 
-    end = 3;
-    choice();
+    main();
 }
 double in(double a, double b, int N, double (*f)(double x))
 {
@@ -330,26 +331,4 @@ int delete(int **A, int n, int m, int d)
             A[j][i] = A[j][i+1];
 
     return A;
-}
-int choice()
-{
-    int choice;
-    printf("1 - repeat the program, 2 - go back to the menu, 3 - exit the program\n");
-    scanf("%d", &choice);
-    if(choice == 1)
-    {
-       switch(end)
-       {
-           case 1: first();
-           break;
-           case 2: second();
-           break;
-           case 3: third();
-           break;
-       }
-    }
-    else if(choice == 2)
-        main();
-    else if(choice == 3)
-        system("exit");
 }
