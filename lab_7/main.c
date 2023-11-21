@@ -81,7 +81,7 @@ void first()
         fclose(fp);
         remove(fp);
         FILE *fl = fopen(filename, "w+");
-        fprintf_s(fl, postbuffer);
+        fprintf(fl, postbuffer);
         fclose(fl);
         printf("Task well done!\n");
     }
