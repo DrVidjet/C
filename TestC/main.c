@@ -1,27 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main()
 {
-    srand(time(NULL));
+    char word[] = "ab. ab";
+    char new_word[ strlen(word) ];
 
-    int A[20], i, temp;
+    int j=0;
+    for(int i=0; i<strlen(word); i++)
+    {
+        if (word[i] != ' ')
+        {
+            new_word[j] = word[i];
+            j++;
+        }
+    }
+    new_word[j] = '\0';
 
-    for(i = 0; i < 20; i++)
+    printf("%d\n", strlen(new_word));
+
+    char result[ strlen(new_word) ];
+
+    int i = 0;
+    for(; i<strlen(new_word) - 2; i++)
     {
-        A[i] = -100+rand()%200;
-        printf("%d ", A[i]);
+        "bbfd      -       hf"
+        char* buffer = new_word[i-2];
+        strncat(result, buffer, 1);
     }
-    printf("\n");
-    for(i = 0; i < 20/2; i++)
-    {
-        temp = A[i];
-        A[i] = A[20-i-1];
-        A[20-i-1] = temp;
-    }
-    for(i = 0; i < 20; i++)
-        printf("%d ", A[i]);
-    printf("\n");
+    result[i+1] = '\0';
+
+    printf("%s", result);
+
 
     return 0;
 }
