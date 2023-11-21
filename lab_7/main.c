@@ -44,7 +44,7 @@ void first()
     for(i = -1; filename[++i] > 31;);
     filename[i] = '\0';
 
-    FILE *fp = fopen(filename, "r+");
+    FILE *fp = fopen(filename, "r+");\
 
     if(fp)
     {
@@ -69,7 +69,7 @@ void first()
             if(buffer[i] != '.')
             {
                 c += !((buffer[i]|0x20)-'o');
-                if(buffer[i] == ' ')if(c == 2)prov = 1;else prov = 0;
+                if(buffer[i] == ' ')if(c == 2)prov = 1;
                 c *= !!(buffer[i] - ' ');
                 printf("c = %d, buffer[%d] = %c\n", c, i, buffer[i]);
             }
@@ -79,11 +79,11 @@ void first()
                 printf("prov = %d\n", prov);
                 if(prov)r = i;
                 else
-                    for(;r<=i;)buffer[w++] = buffer[r++];
+                    for(;r<i;)buffer[w++] = buffer[r++];
                 prov = 0;
             }
         }
-        buffer[w+1] = '\0';
+        buffer[w] = '\0';
         printf("c = %d\n", c);
         printf("%s\n", buffer);
         printf("Task well done!\n");
