@@ -34,55 +34,58 @@ void first()
 {
     char *filename;
     filename = (char*)malloc(15);
-    int i, j, c = 0, d = 0, b = 0;
+    int i, j, c, r, w;
     bool prov;
 
     printf("Enter the file name: ");
     fflush(stdin);
-    scanf("%s", filename);
+    fgets(filename, 15, stdin);
+
+    for(i = -1; filename[++i] > 31;);
+    filename[i] = '\0';
 
     FILE *fp = fopen(filename, "r+");
 
-    char buffer[256];
-    char postbuffer[256];
-
     if(fp)
     {
-        while((fgets(buffer, 256, fp)) != NULL)
+        fseek(fp, 0, SEEK_END);
+        long size = ftell(fp);
+        fseek(fp, 0, SEEK_SET);
+        printf("size = %d\n", size);
+
+        char *buffer;
+
+        buffer = (char*)malloc(size+1);
+
+        for(i = 0; i<size;)buffer[i++] = fgetc(fp);
+        buffer[size] = '\0';
+
+        for(i = -1; buffer[++i];)buffer[i] += 22*!(buffer[i] - '\n');
+
+        printf("%s\n", buffer);
+
+        for(prov = c = i = r = w = 0; i < size; i++)
         {
-            for(i = 0; i < strlen(buffer); i++)
+            if(buffer[i] != '.')
             {
-                if(buffer[i] == 'o' || buffer[i] == 'O')
-                    c++;
-                else if(buffer[i] == ' ')
-                {
-                    if(c > 1)
-                        prov = 0;
-                    else
-                        prov = 1;
-                    c = 0;
-                }
-                else if(buffer[i] == '.')
-                {
-                    if(prov)
-                    {
-                        for(j = d; j < i+2; j++)
-                        {
-                            postbuffer[b] = buffer[j];
-                            b++;
-                        }
-                    }
-                    prov = 0;
-                    d = i+2;
-                }
+                c += !((buffer[i]|0x20)-'o');
+                if(buffer[i] == ' ')if(c == 2)prov = 1;else prov = 0;
+                c *= !!(buffer[i] - ' ');
+                printf("c = %d, buffer[%d] = %c\n", c, i, buffer[i]);
             }
-            //Hollow knight. Hello knight.
+            else
+            {
+                if(c == 2)prov = 1;
+                printf("prov = %d\n", prov);
+                if(prov)r = i;
+                else
+                    for(;r<=i;)buffer[w++] = buffer[r++];
+                prov = 0;
+            }
         }
-        fclose(fp);
-        remove(fp);
-        FILE *fl = fopen(filename, "w+");
-        fprintf(fl, postbuffer);
-        fclose(fl);
+        buffer[w+1] = '\0';
+        printf("c = %d\n", c);
+        printf("%s\n", buffer);
         printf("Task well done!\n");
     }
     main();

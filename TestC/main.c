@@ -1,15 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main()
 {
-    FILE *fp = fopen("text.txt", "r+");
+    char word[] = "ab. ab";
+    char new_word[ strlen(word) ];
 
-    char buffer[256];
+    int j=0;
+    for(int i=0; i<strlen(word); i++)
+    {
+        if (word[i] != ' ')
+        {
+            new_word[j] = word[i];
+            j++;
+        }
+    }
+    new_word[j] = '\0';
 
-    long d = ftell(fp);
+    printf("%d\n", strlen(new_word));
 
-    fseek(fp, 5, SEEK_SET);
+    char result[ strlen(new_word) ];
 
-    fprintf(fp, "AAA");
+    int i = 0;
+    for(; i<strlen(new_word) - 2; i++)
+    {
+        "bbfd      -       hf"
+        char* buffer = new_word[i-2];
+        strncat(result, buffer, 1);
+    }
+    result[i+1] = '\0';
+
+    printf("%s", result);
+
+
+    return 0;
 }
