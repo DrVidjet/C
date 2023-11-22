@@ -34,7 +34,7 @@ void first()
 {
     char *filename;
     filename = (char*)malloc(15);
-    int i, j, c, r, w;
+    int i, c, r, w;
     bool prov;
 
     printf("Enter the file name: ");
@@ -44,9 +44,10 @@ void first()
     for(i = -1; filename[++i] > 31;);
     filename[i] = '\0';
 
-    FILE *fp = fopen(filename, "r+");\
+    FILE *fp = fopen(filename, "r+");
 
-    if(fp)
+    if(!fp)main();
+    else
     {
         fseek(fp, 0, SEEK_END);
         long size = ftell(fp);
@@ -69,24 +70,41 @@ void first()
             if(buffer[i] != '.')
             {
                 c += !((buffer[i]|0x20)-'o');
-                if(buffer[i] == ' ')if(c == 2)prov = 1;
+                if(buffer[i] == ' ' && c == 2)prov = 1;
+                if(c > 2)prov = 0;
                 c *= !!(buffer[i] - ' ');
                 printf("c = %d, buffer[%d] = %c\n", c, i, buffer[i]);
+                printf("prov = %d\n", prov);
             }
             else
             {
                 if(c == 2)prov = 1;
-                printf("prov = %d\n", prov);
-                if(prov)r = i;
+                if(prov && r == 0)r = i+2;
+                else if(prov && r != 0)r = i;
                 else
-                    for(;r<i;)buffer[w++] = buffer[r++];
+                    for(;r < i;)
+                    {
+                        buffer[w++] = buffer[r++];
+                        printf("w = %d, r = %d\n", w, r);
+                    }
                 prov = 0;
             }
         }
-        buffer[w] = '\0';
+        buffer[w+2] = '\0';
         printf("c = %d\n", c);
-        printf("%s\n", buffer);
-        printf("Task well done!\n");
+        for(i = 0; i < w;)printf("%c", buffer[i++]);
+
+        remove(fp);
+        FILE *fl = fopen(filename, "w+");
+
+        for(i = 0; i < w;)fputc(buffer[i++], fl);
+
+        fclose(fl);
+        fclose(fp);
+        free(filename);
+        free(buffer);
+
+        printf("\n\nTask well done!\n\n");
     }
     main();
 }
